@@ -1,7 +1,7 @@
 'use strict';
 
 // Versión de la app (se ve en la pantalla de inicio). Arreglos y ajustes: 0.x.y; novedades: 0.x.0.
-const APP_VERSION = '0.1.0';
+const APP_VERSION = '0.1.1';
 const STORAGE_KEY = 'tripctrl:v1';
 const DISPLAY_KEY = 'tripctrl:display';
 const INSTALL_HINT_KEY = 'tripctrl:installHint';
@@ -1294,7 +1294,7 @@ function openSyncSheet() {
       <label class="fld"><span>Contraseña</span><input id="s-pass" type="password" autocomplete="${mode === 'create' ? 'new-password' : 'current-password'}" maxlength="128" /></label>
       ${mode === 'create' ? `
       <label class="fld"><span>Repite la contraseña</span><input id="s-pass2" type="password" autocomplete="new-password" maxlength="128" /></label>
-      <label class="fld"><span>Clave de registro</span><input id="s-invite" type="text" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="64" placeholder="La misma que en UnderCTRL" /></label>` : ''}
+      <label class="fld"><span>Clave de registro</span><input id="s-invite" type="text" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="64" placeholder="Clave administrador" /></label>` : ''}
       <p class="form-error" id="s-error" role="alert"></p>
       <div class="body-actions"><button type="button" class="done-btn" id="s-go">${mode === 'create' ? 'Crear cuenta' : 'Entrar'}</button></div>`;
     const q = (sel) => sheet.querySelector(sel);
