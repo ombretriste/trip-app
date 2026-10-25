@@ -1,7 +1,7 @@
 'use strict';
 
 // Versión de la app (se ve en la pantalla de inicio). Arreglos y ajustes: 0.x.y; novedades: 0.x.0.
-const APP_VERSION = '0.1.2';
+const APP_VERSION = '0.1.3';
 const STORAGE_KEY = 'tripctrl:v1';
 const DISPLAY_KEY = 'tripctrl:display';
 const INSTALL_HINT_KEY = 'tripctrl:installHint';
@@ -1575,6 +1575,17 @@ document.addEventListener('gesturestart', (e) => e.preventDefault());
 document.addEventListener('dblclick', (e) => e.preventDefault(), { passive: false });
 
 navigator.storage?.persist?.().catch(() => {});
+
+// ---------- Difuminado del contenido sobre el botón de abajo (como en UnderCTRL y Up to 40%) ----------
+function updateFade() {
+  const barTop = $('add-btn').getBoundingClientRect().top - 10;
+  for (const el of document.querySelectorAll('main > *')) {
+    el.style.setProperty('--fade-b', `${Math.round(barTop - el.getBoundingClientRect().top)}px`);
+  }
+}
+window.addEventListener('scroll', updateFade, { passive: true });
+window.addEventListener('resize', updateFade);
+new ResizeObserver(updateFade).observe(document.querySelector('main'));
 
 applyDisplay();
 render();
