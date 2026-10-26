@@ -2,7 +2,7 @@
 
 *by OmT Finance*
 
-Versión **0.1.3** (se muestra en la pantalla de inicio). Las correcciones y ajustes suben el último número (0.1.1); las novedades, el del medio (0.2.0).
+Versión **0.1.4** (se muestra en la pantalla de inicio). Las correcciones y ajustes suben el último número (0.1.1); las novedades, el del medio (0.2.0).
 
 App web instalable (PWA) para organizar los viajes: plan día a día, documentos de cada viajero en regla (con DocCTRL), gastos y maleta. Mismo estilo que las demás apps de OmT, en tonos coral.
 

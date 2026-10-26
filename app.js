@@ -1,7 +1,7 @@
 'use strict';
 
 // Versión de la app (se ve en la pantalla de inicio). Arreglos y ajustes: 0.x.y; novedades: 0.x.0.
-const APP_VERSION = '0.1.3';
+const APP_VERSION = '0.1.4';
 const STORAGE_KEY = 'tripctrl:v1';
 const DISPLAY_KEY = 'tripctrl:display';
 const INSTALL_HINT_KEY = 'tripctrl:installHint';
@@ -68,8 +68,8 @@ function logoSVG(size) {
       </defs>
       <circle cx="60" cy="60" r="52" stroke="url(#${id})" stroke-width="1.2" opacity=".55"/>
       <circle cx="60" cy="60" r="42" stroke="url(#${id})" stroke-width=".8" stroke-dasharray="2 5" opacity=".6"/>
-      <path d="M60 8 A52 52 0 1 1 14.97 86" stroke="url(#${id})" stroke-width="3"/>
-      <circle cx="14.97" cy="86" r="3" fill="#fb7185" stroke="none"/>
+      <path class="logo-arc" pathLength="1" d="M60 8 A52 52 0 1 1 14.97 86" stroke="url(#${id})" stroke-width="3"/>
+      <circle class="logo-dot" cx="14.97" cy="86" r="3" fill="#fb7185" stroke="none"/>
       <path transform="rotate(45 60 60)" d="M60 30c3 0 4 4 4 8v14l22 12v6l-22-6v12l7 5v5l-11-3-11 3v-5l7-5v-12l-22 6v-6l22-12v-14c0-4 1-8 4-8z" stroke="url(#${id})" stroke-width="1.8"/>
     </svg>`;
 }
@@ -1503,16 +1503,21 @@ document.querySelector('main').addEventListener('click', (e) => {
 
 // ---------- Pantalla de inicio ----------
 
-$('enter-btn').addEventListener('click', () => {
+// Sin botón Entrar: el logo aparece (el arco se dibuja), se ve un instante y se pasa sola a la app
+// con la transición de cristal, como en ChatCTRL.
+const SPLASH_HOLD_MS = 1700;
+const SPLASH_OUT_MS = 800;
+function enterApp() {
   const body = document.body;
-  if (body.classList.contains('entering')) return;
+  if (!$('splash') || body.classList.contains('entering')) return;
   body.classList.add('entering');
   setTimeout(() => {
     $('splash').remove();
     body.classList.remove('booting', 'entering');
     maybeShowInstallHint();
-  }, 820);
-});
+  }, SPLASH_OUT_MS);
+}
+setTimeout(enterApp, SPLASH_HOLD_MS);
 
 // ---------- Aviso: añadir a la pantalla de inicio (solo móvil y tablet) ----------
 
