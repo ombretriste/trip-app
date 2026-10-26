@@ -1,7 +1,7 @@
 'use strict';
 
 // Versión de la app (se ve en la pantalla de inicio). Arreglos y ajustes: 0.x.y; novedades: 0.x.0.
-const APP_VERSION = '0.1.4';
+const APP_VERSION = '0.1.5';
 const STORAGE_KEY = 'tripctrl:v1';
 const DISPLAY_KEY = 'tripctrl:display';
 const INSTALL_HINT_KEY = 'tripctrl:installHint';
@@ -1506,7 +1506,7 @@ document.querySelector('main').addEventListener('click', (e) => {
 // Sin botón Entrar: el logo aparece (el arco se dibuja), se ve un instante y se pasa sola a la app
 // con la transición de cristal, como en ChatCTRL.
 const SPLASH_HOLD_MS = 1700;
-const SPLASH_OUT_MS = 800;
+const SPLASH_OUT_MS = 1200;
 function enterApp() {
   const body = document.body;
   if (!$('splash') || body.classList.contains('entering')) return;
