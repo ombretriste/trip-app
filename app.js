@@ -1,7 +1,7 @@
 'use strict';
 
 // Versión de la app (se ve en la pantalla de inicio). Arreglos y ajustes: 0.x.y; novedades: 0.x.0.
-const APP_VERSION = '0.1.6';
+const APP_VERSION = '0.1.7';
 const STORAGE_KEY = 'tripctrl:v1';
 const DISPLAY_KEY = 'tripctrl:display';
 const INSTALL_HINT_KEY = 'tripctrl:installHint';

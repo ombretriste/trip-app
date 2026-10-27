@@ -1,5 +1,5 @@
 // Cambia la versión al modificar archivos para que los móviles descarguen la nueva versión
-const CACHE = 'tripctrl-v7';
+const CACHE = 'tripctrl-v8';
 const ASSETS = [
   './',
   'index.html',
