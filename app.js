@@ -1,7 +1,7 @@
 'use strict';
 
 // Versión de la app (se ve en la pantalla de inicio). Arreglos y ajustes: 0.x.y; novedades: 0.x.0.
-const APP_VERSION = '0.2.2';
+const APP_VERSION = '0.3.0';
 // Uso de la app en Vercel Analytics: es una sola página, así que cada función se cuenta como una
 // página virtual. Solo se envía el nombre de la función, nunca datos de la app.
 const track = (path) => { try { window.va?.('pageview', { path }); } catch (_) { /* sin analítica */ } };
@@ -15,6 +15,7 @@ const LINK_DATA_KEY = 'tripctrl:docData';
 const DOC_URL = 'https://doc-app-lovat.vercel.app/'; // DocCTRL: «?open=id» abre la ficha de esa partida
 
 const ICONS = {
+  info: '<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5"/><circle cx="12" cy="7.8" r=".9" fill="currentColor" stroke="none"/>',
   // Plan y gastos
   plane: '<path d="M12 2.5c.8 0 1.4.7 1.4 1.6v5.4l7.6 4.6V16l-7.6-2.3v4.6l2.1 1.6v1.6L12 20.4l-3.5 1.1v-1.6l2.1-1.6v-4.6L3 16v-1.9l7.6-4.6V4.1c0-.9.6-1.6 1.4-1.6z"/>',
   train: '<rect x="6" y="3" width="12" height="14" rx="3"/><path d="M6 10h12"/><circle cx="9" cy="13.5" r=".8" fill="currentColor"/><circle cx="15" cy="13.5" r=".8" fill="currentColor"/><path d="M8.5 17l-2 4M15.5 17l2 4M9.5 6.5h5"/>',
@@ -1367,6 +1368,7 @@ const MENU = [
   { label: 'Opciones de visualización', icon: 'palette', run: () => openDisplaySheet() },
   { label: 'Exportar copia', icon: 'download', run: () => exportBackup() },
   { label: 'Importar copia', icon: 'upload', run: () => $('import-input').click() },
+  { label: 'Información', icon: 'info', run: () => openInfoSheet() },
 ];
 
 function openMenu() {
@@ -1397,6 +1399,24 @@ document.addEventListener('click', (e) => {
   if (!$('menu').hidden && !e.target.closest('#menu')) closeMenu();
 });
 window.addEventListener('resize', closeMenu);
+
+function openInfoSheet() {
+  closeSheet();
+  const back = document.createElement('div');
+  back.className = 'sheet-backdrop center';
+  back.innerHTML = `
+    <div class="sheet info-sheet" role="dialog" aria-modal="true" aria-label="Información">
+      <span class="install-logo">${logoSVG(56)}</span>
+      <h2 class="sheet-title">TripCTRL</h2>
+      <p class="small muted">Versión ${APP_VERSION} · by OmT Finance</p>
+      <p class="small">Prepara cada viaje con su plan día a día, comprueba que los documentos están en regla, lleva la cuenta de los gastos y no olvides nada en la maleta.</p>
+      <p class="small muted">Tus viajes se guardan en este dispositivo. Con la sincronización en la nube activada, se cifran en tu dispositivo antes de subirse.</p>
+      <div class="info-actions"><button type="button" class="done-btn" data-close>Cerrar</button></div>
+    </div>`;
+  document.body.append(back);
+  back.addEventListener('click', (e) => { if (e.target === back) closeSheet(); });
+  back.querySelector('[data-close]').addEventListener('click', closeSheet);
+}
 
 // ---------- Opciones de visualización (modo y fondo) ----------
 
