@@ -2,7 +2,7 @@
 
 *by OmT Finance*
 
-Versión **0.1.7** (se muestra en la pantalla de inicio). Las correcciones y ajustes suben el último número (0.1.1); las novedades, el del medio (0.2.0).
+Versión **0.2.0** (se muestra en la pantalla de inicio). Las correcciones y ajustes suben el último número (0.1.1); las novedades, el del medio (0.2.0).
 
 App web instalable (PWA) para organizar los viajes: plan día a día, documentos de cada viajero en regla (con DocCTRL), gastos y maleta. Mismo estilo que las demás apps de OmT, en tonos coral.
 
@@ -32,6 +32,10 @@ Como DocCTRL y TaskCTRL (`api/sync.js`): usuario y contraseña derivan con PBKDF
 2. Comprueba `https://<tu-app>.vercel.app/api/sync`: debe decir `"configured": true`.
 
 Los datos se guardan en el propio dispositivo (`localStorage`, `tripctrl:v1`).
+
+## Analítica
+
+Vercel Web Analytics (se activa en la pestaña Analytics del proyecto de Vercel, sin cookies). La app es una sola página, así que cada función se cuenta como una página virtual con `track()` en `app.js`. Solo se envía el nombre de la función, nunca datos de la app, y `beforeSend` (en `index.html`) quita de la dirección lo que va tras `?` o `#`.
 
 ## Desarrollo
 

@@ -1,5 +1,5 @@
 // Cambia la versión al modificar archivos para que los móviles descarguen la nueva versión
-const CACHE = 'tripctrl-v8';
+const CACHE = 'tripctrl-v9';
 const ASSETS = [
   './',
   'index.html',
@@ -27,7 +27,7 @@ self.addEventListener('activate', (event) => {
 
 // Red primero (para recibir actualizaciones); caché si no hay conexión. La API nunca se cachea.
 self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET' || new URL(event.request.url).pathname.includes('/api/')) return;
+  if (event.request.method !== 'GET' || new URL(event.request.url).pathname.match(/\/api\/|^\/_vercel\//)) return;
   event.respondWith(
     fetch(event.request)
       .then((response) => {
